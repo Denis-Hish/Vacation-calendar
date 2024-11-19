@@ -7,13 +7,13 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 
 function App() {
-  // Определяем тему устройства пользователя
+  // Определение темы устройства
   const getPreferredTheme = () =>
     window.matchMedia('(prefers-color-scheme: dark)').matches
       ? 'dark'
       : 'light';
 
-  // Функция для получения темы из LocalStorage или определения темы устройства
+  // Получения темы из LocalStorage или определение темы устройства
   const getInitialTheme = () => {
     const savedTheme = localStorage.getItem('theme');
     return savedTheme ? savedTheme : getPreferredTheme();
@@ -26,7 +26,7 @@ function App() {
   // console.log(selectedDates);
   // console.log(totalVacationDays);
 
-  // При загрузке страницы восстанавливаем сохранёную тему из LocalStorage
+  // Восстанавление сохранённой темы из LocalStorage
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
@@ -40,7 +40,7 @@ function App() {
     }
   }, []);
 
-  // Функция переключения темы
+  // Переключения темы
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
@@ -48,8 +48,8 @@ function App() {
     localStorage.setItem('theme', newTheme);
   };
 
-  // Функция удаления даты
-  const removeDate = date => {
+  // Удаления даты
+  const handleRemoveDate = date => {
     setSelectedDates(selectedDates.filter(d => d !== date));
   };
 
@@ -84,7 +84,7 @@ function App() {
             <div className="col">
               <VacationList
                 selectedDates={selectedDates}
-                removeDate={removeDate}
+                onRemoveDate={handleRemoveDate}
               />
             </div>
           </div>

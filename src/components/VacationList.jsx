@@ -1,4 +1,4 @@
-function VacationList({ selectedDates, removeDate }) {
+function VacationList({ selectedDates, onRemoveDate }) {
   const formatDate = isoDate => {
     const date = new Date(isoDate);
     return date.toLocaleDateString();
@@ -13,7 +13,7 @@ function VacationList({ selectedDates, removeDate }) {
             type="button"
             className="remove-btn btn-close rounded-circle"
             aria-label="Close"
-            onClick={() => removeDate(date)}
+            onClick={() => onRemoveDate(date)}
           ></button>
         </li>
       ))}

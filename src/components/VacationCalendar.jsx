@@ -8,7 +8,6 @@ function VacationCalendar({ theme, selectedDates, setSelectedDates }) {
 
   useEffect(() => {
     if (!ref.current) return;
-
     const options = {
       selectedTheme: theme,
       selectionDatesMode: 'multiple',
@@ -18,7 +17,6 @@ function VacationCalendar({ theme, selectedDates, setSelectedDates }) {
       },
       selectedDates: selectedDates,
     };
-
     setCalendar(new Calendar(ref.current, options));
   }, [ref, theme, setSelectedDates]);
 
