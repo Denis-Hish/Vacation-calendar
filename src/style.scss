@@ -78,12 +78,12 @@ footer {
 #calendar {
   margin: 50px auto;
   max-width: 280px;
-  // box-shadow: 5px 5px 5px var(--neo-shadow1), -5px -5px 5px var(--neo-shadow2);
-  // background-color: var(--neo-bg);
+  box-shadow: 5px 5px 5px var(--neo-shadow1), -5px -5px 5px var(--neo-shadow2);
+  background-color: var(--neo-bg);
 
-  // .vc-date__btn:not([aria-selected='true']) {
-  //   background-color: var(--neo-bg);
-  // }
+  .vc-date__btn:not([aria-selected='true']) {
+    background-color: var(--neo-bg);
+  }
 }
 
 .vacation-list {

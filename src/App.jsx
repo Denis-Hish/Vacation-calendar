@@ -7,20 +7,26 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 
 function App() {
-  const [theme, setTheme] = useState('light');
-  const [selectedDates, setSelectedDates] = useState([]);
-  const [totalVacationDays, setTotalVacationDays] = useState(20);
-
-  // console.log(selectedDates);
-  // console.log(totalVacationDays);
-
   // Определяем тему устройства пользователя
   const getPreferredTheme = () =>
     window.matchMedia('(prefers-color-scheme: dark)').matches
       ? 'dark'
       : 'light';
 
-  // При загрузке страницы восстанавливаем сохранённые данные из LocalStorage
+  // Функция для получения темы из LocalStorage или определения темы устройства
+  const getInitialTheme = () => {
+    const savedTheme = localStorage.getItem('theme');
+    return savedTheme ? savedTheme : getPreferredTheme();
+  };
+
+  const [theme, setTheme] = useState(getInitialTheme);
+  const [selectedDates, setSelectedDates] = useState([]);
+  const [totalVacationDays, setTotalVacationDays] = useState(20);
+
+  console.log(selectedDates);
+  // console.log(totalVacationDays);
+
+  // При загрузке страницы восстанавливаем сохранёную тему из LocalStorage
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
@@ -43,9 +49,9 @@ function App() {
   };
 
   // Функция удаления даты
-  // const removeDate = date => {
-  //   setSelectedDates(selectedDates.filter(d => d !== date));
-  // };
+  const removeDate = date => {
+    setSelectedDates(selectedDates.filter(d => d !== date));
+  };
 
   return (
     <>
@@ -78,7 +84,7 @@ function App() {
             <div className="col">
               <VacationList
                 selectedDates={selectedDates}
-                // removeDate={removeDate}
+                removeDate={removeDate}
               />
             </div>
           </div>

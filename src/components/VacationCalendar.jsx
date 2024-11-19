@@ -6,6 +6,8 @@ function VacationCalendar({ theme, selectedDates, setSelectedDates }) {
   const ref = useRef(null);
   const [calendar, setCalendar] = useState(null);
 
+  console.log(selectedDates);
+
   useEffect(() => {
     if (!ref.current) return;
 
@@ -16,7 +18,7 @@ function VacationCalendar({ theme, selectedDates, setSelectedDates }) {
         // console.log(self.context.selectedDates);
         setSelectedDates(self.context.selectedDates);
       },
-      // selectedDates: selectedDates,
+      selectedDates: selectedDates,
     };
 
     setCalendar(new Calendar(ref.current, options));
@@ -25,7 +27,7 @@ function VacationCalendar({ theme, selectedDates, setSelectedDates }) {
   useEffect(() => {
     if (!calendar) return;
     calendar.init();
-  }, [calendar]);
+  }, [calendar, theme]);
 
   return <div id="calendar" ref={ref}></div>;
 }
