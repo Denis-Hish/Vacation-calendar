@@ -1,0 +1,17 @@
+function VacationCard({ totalVacationDays, setTotalVacationDays }) {
+  return (
+    <div className="card neumorphism m-5 border-0">
+      <div className="card-body text-center">
+        <p className="mb-0">Количество дней отпуска:</p>
+        <input
+          type="number"
+          className="total-vacation-days"
+          value={totalVacationDays}
+          onChange={e => setTotalVacationDays(e.target.value)}
+        />
+      </div>
+    </div>
+  );
+}
+
+export default VacationCard;

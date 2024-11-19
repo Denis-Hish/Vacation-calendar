@@ -1,0 +1,3 @@
+https://vanilla-calendar.pro/ru
+
+"devDependencies": { "@types/react": "^18.3.12", "@types/react-dom": "^18.3.1", }
