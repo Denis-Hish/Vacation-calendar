@@ -23,7 +23,7 @@ function App() {
   const [selectedDates, setSelectedDates] = useState([]);
   const [totalVacationDays, setTotalVacationDays] = useState(20);
 
-  console.log(selectedDates);
+  // console.log(selectedDates);
   // console.log(totalVacationDays);
 
   // При загрузке страницы восстанавливаем сохранёную тему из LocalStorage

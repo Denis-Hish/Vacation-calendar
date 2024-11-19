@@ -6,8 +6,6 @@ function VacationCalendar({ theme, selectedDates, setSelectedDates }) {
   const ref = useRef(null);
   const [calendar, setCalendar] = useState(null);
 
-  console.log(selectedDates);
-
   useEffect(() => {
     if (!ref.current) return;
 
