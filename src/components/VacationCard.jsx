@@ -1,4 +1,8 @@
-function VacationCard({ totalVacationDays, setTotalVacationDays }) {
+import { useContextProvider } from '../hooks/useContextProvider';
+
+function VacationCard() {
+  const { totalVacationDays, setTotalVacationDays } = useContextProvider();
+
   return (
     <div className="card neumorphism m-5 border-0">
       <div className="card-body text-center">

@@ -1,4 +1,8 @@
-function VacationList({ selectedDates, onRemoveDate }) {
+import { useContextProvider } from '../hooks/useContextProvider';
+
+function VacationList() {
+  const { selectedDates, onRemoveDate } = useContextProvider();
+
   const formatDate = isoDate => {
     const date = new Date(isoDate);
     return date.toLocaleDateString();

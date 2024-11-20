@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
+import { useContextProvider } from '../hooks/useContextProvider';
 import { Calendar } from 'vanilla-calendar-pro';
 import 'vanilla-calendar-pro/styles/index.css';
 
-function VacationCalendar({ theme, selectedDates, setSelectedDates }) {
+function VacationCalendar() {
+  const { theme, selectedDates, setSelectedDates } = useContextProvider();
   const ref = useRef(null);
   const [calendar, setCalendar] = useState(null);
 
@@ -12,7 +14,7 @@ function VacationCalendar({ theme, selectedDates, setSelectedDates }) {
       selectedTheme: theme,
       selectionDatesMode: 'multiple',
       onClickDate(self) {
-        // console.log(self.context.selectedDates);
+        console.log(self.context.selectedDates);
         setSelectedDates(self.context.selectedDates);
       },
       selectedDates: selectedDates,

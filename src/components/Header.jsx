@@ -1,4 +1,8 @@
-function Header({ theme, toggleTheme }) {
+import { useContextProvider } from '../hooks/useContextProvider';
+
+function Header() {
+  const { theme, toggleTheme } = useContextProvider();
+
   return (
     <header className="header neumorphism">
       <div className="container">

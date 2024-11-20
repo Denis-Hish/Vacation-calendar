@@ -1,4 +1,7 @@
-function RenainderCard({ selectedDates, totalVacationDays }) {
+import { useContextProvider } from '../hooks/useContextProvider';
+
+function RenainderCard() {
+  const { selectedDates, totalVacationDays } = useContextProvider();
   const totalSelectedDays = selectedDates.length;
 
   return (
