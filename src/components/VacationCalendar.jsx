@@ -42,14 +42,12 @@ function VacationCalendar() {
   const ref = useRef(null);
   const [calendar, setCalendar] = useState(null);
 
+  console.log(options.selectedDates);
+
   useEffect(() => {
-    //   if (!ref.current) return;
-    //   setCalendar(new Calendar(ref.current, options));
-    // }, [ref, options]);
-    if (!ref.current || calendar) return;
-    const newCalendar = new Calendar(ref.current, options);
-    setCalendar(newCalendar);
-  }, [ref, calendar, options]);
+    if (!ref.current) return;
+    setCalendar(new Calendar(ref.current, options));
+  }, [ref, options]);
 
   useEffect(() => {
     if (!calendar) return;

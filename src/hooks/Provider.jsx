@@ -16,7 +16,7 @@ function Provider({ children }) {
   };
 
   const [theme, setTheme] = useState(getInitialTheme);
-  const [selectedDates, setSelectedDates] = useState([]);
+  const [selectedDates, setSelectedDates] = useState(['2024-11-17']);
   const [totalVacationDays, setTotalVacationDays] = useState(20);
 
   /* -------------------------------------------- */
@@ -24,19 +24,19 @@ function Provider({ children }) {
     selectedTheme: theme,
     selectionDatesMode: 'multiple',
     selectedDates,
-    // onClickDate(self) {
-    //   console.log(self.context.selectedDates);
-    //   // setSelectedDates(self.context.selectedDates);
-    // },
     onClickDate: useCallback(
       self => {
-        const newDates = self.context.selectedDates;
-        if (newDates !== selectedDates) {
-          setSelectedDates(newDates);
+        if (self.context.selectedDates !== selectedDates) {
+          setSelectedDates(self.context.selectedDates);
         }
       },
       [selectedDates]
     ),
+  };
+
+  // Удаления даты
+  const handleRemoveDate = date => {
+    setSelectedDates(selectedDates.filter(d => d !== date));
   };
   /* -------------------------------------------- */
 
@@ -63,11 +63,6 @@ function Provider({ children }) {
     setTheme(newTheme);
     document.documentElement.setAttribute('data-bs-theme', newTheme);
     localStorage.setItem('theme', newTheme);
-  };
-
-  // Удаления даты
-  const handleRemoveDate = date => {
-    setSelectedDates(selectedDates.filter(d => d !== date));
   };
 
   const value = {
