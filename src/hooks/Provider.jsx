@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useCallback, useEffect, useState } from 'react';
 
 const Context = createContext();
 
@@ -16,18 +16,27 @@ function Provider({ children }) {
   };
 
   const [theme, setTheme] = useState(getInitialTheme);
-  const [selectedDates, setSelectedDates] = useState(['2024-11-17']);
+  const [selectedDates, setSelectedDates] = useState([]);
   const [totalVacationDays, setTotalVacationDays] = useState(20);
 
   /* -------------------------------------------- */
-  const calendarConfig = {
+  const calendarOptions = {
     selectedTheme: theme,
     selectionDatesMode: 'multiple',
     selectedDates,
-    onClickDate(self) {
-      console.log(self.context.selectedDates);
-      //   setSelectedDates(self.context.selectedDates);
-    },
+    // onClickDate(self) {
+    //   console.log(self.context.selectedDates);
+    //   // setSelectedDates(self.context.selectedDates);
+    // },
+    onClickDate: useCallback(
+      self => {
+        const newDates = self.context.selectedDates;
+        if (newDates !== selectedDates) {
+          setSelectedDates(newDates);
+        }
+      },
+      [selectedDates]
+    ),
   };
   /* -------------------------------------------- */
 
@@ -69,7 +78,7 @@ function Provider({ children }) {
     setTotalVacationDays,
     toggleTheme,
     onRemoveDate: handleRemoveDate,
-    calendarConfig,
+    calendarOptions,
   };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;

@@ -33,19 +33,23 @@
 // export default VacationCalendar;
 
 import { useEffect, useRef, useState } from 'react';
-import { useContextProvider } from '../hooks/useContextProvider';
 import { Calendar } from 'vanilla-calendar-pro';
 import 'vanilla-calendar-pro/styles/index.css';
+import { useContextProvider } from '../hooks/useContextProvider';
 
 function VacationCalendar() {
-  const { calendarConfig } = useContextProvider();
+  const { calendarOptions: options } = useContextProvider();
   const ref = useRef(null);
   const [calendar, setCalendar] = useState(null);
 
   useEffect(() => {
-    if (!ref.current) return;
-    setCalendar(new Calendar(ref.current, calendarConfig));
-  }, [ref, calendarConfig]);
+    //   if (!ref.current) return;
+    //   setCalendar(new Calendar(ref.current, options));
+    // }, [ref, options]);
+    if (!ref.current || calendar) return;
+    const newCalendar = new Calendar(ref.current, options);
+    setCalendar(newCalendar);
+  }, [ref, calendar, options]);
 
   useEffect(() => {
     if (!calendar) return;
