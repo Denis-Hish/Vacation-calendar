@@ -6,7 +6,7 @@ function VacationCard() {
   return (
     <div className="card neumorphism m-5 border-0">
       <div className="card-body text-center">
-        <p className="mb-0">Количество дней отпуска:</p>
+        <p className="mb-0">Quantity of vacation days:</p>
         <input
           type="number"
           className="total-vacation-days"

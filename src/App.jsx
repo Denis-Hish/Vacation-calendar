@@ -1,7 +1,7 @@
 import VacationCalendar from './components/VacationCalendar';
 import VacationList from './components/VacationList';
 import VacationCard from './components/VacationCard';
-import RenainderCard from './components/RenainderCard';
+import RenainderCard from './components/RemainingCard';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { Provider } from './hooks/Provider';

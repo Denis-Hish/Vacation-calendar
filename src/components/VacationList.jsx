@@ -3,6 +3,8 @@ import { useContextProvider } from '../hooks/useContextProvider';
 function VacationList() {
   const { selectedDates, onRemoveDate } = useContextProvider();
 
+  console.log(selectedDates);
+
   const formatDate = isoDate => {
     const date = new Date(isoDate);
     return date.toLocaleDateString();

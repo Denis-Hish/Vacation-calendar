@@ -9,15 +9,27 @@ function Provider({ children }) {
       ? 'dark'
       : 'light';
 
-  // Получения темы из LocalStorage или определение темы устройства
+  // Получение темы из LocalStorage или определение темы устройства
   const getInitialTheme = () => {
     const savedTheme = localStorage.getItem('theme');
     return savedTheme ? savedTheme : getPreferredTheme();
   };
 
   const [theme, setTheme] = useState(getInitialTheme);
-  const [selectedDates, setSelectedDates] = useState([]);
+  const [selectedDates, setSelectedDates] = useState(['2024-11-17']);
   const [totalVacationDays, setTotalVacationDays] = useState(20);
+
+  /* -------------------------------------------- */
+  const calendarConfig = {
+    selectedTheme: theme,
+    selectionDatesMode: 'multiple',
+    selectedDates,
+    onClickDate(self) {
+      console.log(self.context.selectedDates);
+      //   setSelectedDates(self.context.selectedDates);
+    },
+  };
+  /* -------------------------------------------- */
 
   // console.log(selectedDates);
   // console.log(totalVacationDays);
@@ -57,6 +69,7 @@ function Provider({ children }) {
     setTotalVacationDays,
     toggleTheme,
     onRemoveDate: handleRemoveDate,
+    calendarConfig,
   };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;
