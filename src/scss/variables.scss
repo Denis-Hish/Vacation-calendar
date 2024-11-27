@@ -1,31 +1,32 @@
-$bg-light: #f8fafc;
-$bg-dark: #283548;
-$primary: #ff004f;
-$rounded: 8px;
+// $bg-light: #f8fafc;
+// $bg-dark: #283548;
+$primary: #ff004f; // Для переопределения стилей Bootstrap
+$rounded: 8px; // Для переопределения стилей Bootstrap
+
+:root {
+  --primary: #{$primary};
+  --rounded: #{$rounded};
+}
+
+[data-bs-theme='light'] {
+  --bg-color: #f8fafc;
+  --calendar-hovered: #e4e7eb;
+  --neo-bg: #f8fafc;
+  --neo-shadow1: #dfe1e3;
+  --neo-shadow2: #ffffff;
+}
+
+[data-bs-theme='dark'] {
+  --bg-color: #283548;
+  --calendar-hovered: #1e293b;
+  --neo-bg: #283548;
+  --neo-shadow1: #222d3d;
+  --neo-shadow2: #2e3d53;
+}
 
 @mixin neumorphism {
   background-color: var(--neo-bg);
   box-shadow: 5px 5px 5px var(--neo-shadow1), -5px -5px 5px var(--neo-shadow2);
-}
-
-[data-bs-theme='light'] {
-  --neo-bg: #f8fafc;
-  --neo-shadow1: #dfe1e3;
-  --neo-shadow2: #ffffff;
-
-  body {
-    background-color: $bg-light;
-  }
-}
-
-[data-bs-theme='dark'] {
-  --neo-bg: #283548;
-  --neo-shadow1: #222d3d;
-  --neo-shadow2: #2e3d53;
-
-  body {
-    background-color: $bg-dark;
-  }
 }
 
 // @import '../assets/bootstrap/bootstrap.scss';

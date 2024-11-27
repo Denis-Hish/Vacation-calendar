@@ -1,60 +1,31 @@
-// import { useEffect, useRef, useState } from 'react';
-// import { useContextProvider } from '../hooks/useContextProvider';
-// import { Calendar } from 'vanilla-calendar-pro';
-// import 'vanilla-calendar-pro/styles/index.css';
-
-// function VacationCalendar() {
-//   const { theme, selectedDates, setSelectedDates } = useContextProvider();
-//   const ref = useRef(null);
-//   const [calendar, setCalendar] = useState(null);
-
-//   useEffect(() => {
-//     if (!ref.current) return;
-//     const options = {
-//       selectedTheme: theme,
-//       selectionDatesMode: 'multiple',
-//       onClickDate(self) {
-//         console.log(self.context.selectedDates);
-//         setSelectedDates(self.context.selectedDates);
-//       },
-//       selectedDates: selectedDates,
-//     };
-//     setCalendar(new Calendar(ref.current, options));
-//   }, [ref, theme, setSelectedDates]);
-
-//   useEffect(() => {
-//     if (!calendar) return;
-//     calendar.init();
-//   }, [calendar, theme]);
-
-//   return <div id="calendar" ref={ref}></div>;
-// }
-
-// export default VacationCalendar;
-
-import { useEffect, useRef, useState } from 'react';
-import { Calendar } from 'vanilla-calendar-pro';
-import 'vanilla-calendar-pro/styles/index.css';
+import { DayPicker } from 'react-day-picker';
+import { uk } from 'react-day-picker/locale';
+import 'react-day-picker/style.css';
 import { useContextProvider } from '../hooks/useContextProvider';
 
 function VacationCalendar() {
-  const { calendarOptions: options } = useContextProvider();
-  const ref = useRef(null);
-  const [calendar, setCalendar] = useState(null);
+  const { selectedDates, setSelectedDates, totalVacationDays } =
+    useContextProvider();
+  // const locale = navigator.language;
 
-  console.log(options.selectedDates);
+  console.log('selectedDates -', selectedDates.length);
+  // console.log(totalVacationDays);
 
-  useEffect(() => {
-    if (!ref.current) return;
-    setCalendar(new Calendar(ref.current, options));
-  }, [ref, options]);
+  if (selectedDates.length >= totalVacationDays) {
+    console.log('You have reached the maximum number of vacation days.');
+  }
 
-  useEffect(() => {
-    if (!calendar) return;
-    calendar.init();
-  }, [calendar]);
-
-  return <div id="calendar" ref={ref}></div>;
+  return (
+    <DayPicker
+      id="calendar"
+      mode="multiple"
+      weekStartsOn="1"
+      // captionLayout="dropdown"
+      locale={uk}
+      selected={selectedDates}
+      onSelect={setSelectedDates}
+    />
+  );
 }
 
 export default VacationCalendar;

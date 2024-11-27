@@ -1,8 +1,9 @@
-import { createContext, useCallback, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 const Context = createContext();
 
 function Provider({ children }) {
+  //* ---------------- DARK / LIGHT MODE ---------------- *//
   // Определение темы устройства
   const getPreferredTheme = () =>
     window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -11,37 +12,11 @@ function Provider({ children }) {
 
   // Получение темы из LocalStorage или определение темы устройства
   const getInitialTheme = () => {
-    const savedTheme = localStorage.getItem('theme');
+    const savedTheme = localStorage.getItem('Theme');
     return savedTheme ? savedTheme : getPreferredTheme();
   };
 
   const [theme, setTheme] = useState(getInitialTheme);
-  const [selectedDates, setSelectedDates] = useState(['2024-11-17']);
-  const [totalVacationDays, setTotalVacationDays] = useState(20);
-
-  /* -------------------------------------------- */
-  const calendarOptions = {
-    selectedTheme: theme,
-    selectionDatesMode: 'multiple',
-    selectedDates,
-    onClickDate: useCallback(
-      self => {
-        if (self.context.selectedDates !== selectedDates) {
-          setSelectedDates(self.context.selectedDates);
-        }
-      },
-      [selectedDates]
-    ),
-  };
-
-  // Удаления даты
-  const handleRemoveDate = date => {
-    setSelectedDates(selectedDates.filter(d => d !== date));
-  };
-  /* -------------------------------------------- */
-
-  // console.log(selectedDates);
-  // console.log(totalVacationDays);
 
   // Восстанавление сохранённой темы из LocalStorage
   useEffect(() => {
@@ -53,7 +28,7 @@ function Provider({ children }) {
       const preferredTheme = getPreferredTheme();
       setTheme(preferredTheme);
       document.documentElement.setAttribute('data-bs-theme', preferredTheme);
-      localStorage.setItem('theme', preferredTheme);
+      localStorage.setItem('Theme', preferredTheme);
     }
   }, []);
 
@@ -64,6 +39,41 @@ function Provider({ children }) {
     document.documentElement.setAttribute('data-bs-theme', newTheme);
     localStorage.setItem('theme', newTheme);
   };
+  //* --------------------------------------------------- *//
+
+  //* ---------- SELECTING DAYS IN THE CALENDAR ---------- *//
+  // Получение сохранённых дат из LocalStorage
+  const getInitialSelectedDates = () => {
+    const savedDates = localStorage.getItem('Selected dates');
+    return savedDates ? JSON.parse(savedDates) : []; // Преобразуем строку обратно в массив
+  };
+
+  // Получение сохранённого числа дней отпуска из LocalStorage
+  const getInitialTotalVacationDays = () => {
+    const savedDays = localStorage.getItem('Vacation days');
+    return savedDays ? parseInt(savedDays, 10) : 20; // Преобразуем строку в число, по умолчанию 20
+  };
+
+  const [selectedDates, setSelectedDates] = useState(getInitialSelectedDates);
+  const [totalVacationDays, setTotalVacationDays] = useState(
+    getInitialTotalVacationDays
+  );
+
+  // Сохранение выбранных дат в LocalStorage
+  useEffect(() => {
+    localStorage.setItem('Selected dates', JSON.stringify(selectedDates)); // Сохраняем массив в виде строки
+  }, [selectedDates]);
+
+  // Сохранение `totalVacationDays` в localStorage при его изменении
+  useEffect(() => {
+    localStorage.setItem('Vacation days', totalVacationDays); // Сохраняем число в виде строки
+  }, [totalVacationDays]);
+
+  // Удаление выбранной даты
+  const handleRemoveDate = date => {
+    setSelectedDates(selectedDates.filter(d => d !== date));
+  };
+  //* --------------------------------------------------- *//
 
   const value = {
     theme,
@@ -73,7 +83,6 @@ function Provider({ children }) {
     setTotalVacationDays,
     toggleTheme,
     onRemoveDate: handleRemoveDate,
-    calendarOptions,
   };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;

@@ -7,6 +7,7 @@
 
 body {
   font-family: 'Lato', sans-serif;
+  background-color: var(--bg-color);
 }
 
 h1,
@@ -33,11 +34,6 @@ p {
   @include neumorphism;
 }
 
-// #calendar {
-//   @include neumorphism;
-//   background-color: rgb(15, 23, 42);
-// }
-
 header {
   .app-name {
     font-family: 'Cinzel Decorative', cursive;
@@ -63,7 +59,7 @@ main {
     span {
       font-size: 40px;
       font-weight: 900;
-      color: $primary;
+      color: var(--primary);
     }
   }
 }
@@ -77,12 +73,24 @@ footer {
 
 #calendar {
   margin: 50px auto;
-  max-width: 280px;
-  box-shadow: 5px 5px 5px var(--neo-shadow1), -5px -5px 5px var(--neo-shadow2);
-  background-color: var(--neo-bg);
+  width: fit-content;
+  padding: 1rem;
+  @include neumorphism;
+  border-radius: var(--rounded);
 
-  .vc-date__btn:not([aria-selected='true']) {
-    background-color: var(--neo-bg);
+  &.rdp-root {
+    --rdp-accent-color: var(--primary);
+    --rdp-day_button-border-radius: var(--rounded);
+    --rdp-selected-border: 1px solid var(--primary);
+  }
+
+  .rdp-selected {
+    font-weight: inherit;
+    font-size: inherit;
+  }
+
+  .rdp-day_button:hover {
+    background-color: var(--calendar-hovered);
   }
 }
 
@@ -95,7 +103,7 @@ footer {
     position: relative;
     list-style: none;
     padding: 6px 24px;
-    border-radius: $rounded;
+    border-radius: var(--rounded);
     margin-bottom: 16px;
 
     .date {
@@ -120,7 +128,7 @@ footer {
   text-align: center;
   font-size: 40px;
   font-weight: 900;
-  color: $primary;
+  color: var(--primary);
   cursor: pointer;
 
   &:focus-visible {
