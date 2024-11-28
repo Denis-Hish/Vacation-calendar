@@ -60,6 +60,7 @@ function Provider({ children }) {
   const [totalVacationDays, setTotalVacationDays] = useState(
     getInitialTotalVacationDays
   );
+  const totalSelectedDays = selectedDates.length;
 
   // Сохранение выбранных дат в LocalStorage
   useEffect(() => {
@@ -118,6 +119,13 @@ function Provider({ children }) {
     }
   }, [selectedDates, totalVacationDays]);
 
+  // Блокировка изменения количества дней отпуска, если результат выражения меньше 0
+  const handleOnChangeTotalVacationDays = e => {
+    const newVacationDays = parseInt(e.target.value, 10);
+    if (newVacationDays >= totalSelectedDays) {
+      setTotalVacationDays(newVacationDays);
+    }
+  };
   //* --------------------------------------------------- *//
 
   //* ------------------- TRANSLATOR ------------------- *//
@@ -171,6 +179,7 @@ function Provider({ children }) {
     theme,
     selectedDates,
     setSelectedDates,
+    totalSelectedDays,
     totalVacationDays,
     setTotalVacationDays,
     toggleTheme,
@@ -180,6 +189,7 @@ function Provider({ children }) {
     selectedLocale,
     calendarRef,
     isLimitReached,
+    handleOnChangeTotalVacationDays,
   };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;

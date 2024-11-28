@@ -2,8 +2,8 @@ import { useTranslation } from 'react-i18next';
 import { useContextProvider } from '../hooks/useContextProvider';
 
 function RenainderCard() {
-  const { selectedDates, totalVacationDays } = useContextProvider();
-  const totalSelectedDays = selectedDates.length;
+  const { totalVacationDays, totalSelectedDays } = useContextProvider();
+
   const { t } = useTranslation();
 
   return (

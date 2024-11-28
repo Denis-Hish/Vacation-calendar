@@ -2,7 +2,8 @@ import { useContextProvider } from '../hooks/useContextProvider';
 import { useTranslation } from 'react-i18next';
 
 function VacationCard() {
-  const { totalVacationDays, setTotalVacationDays } = useContextProvider();
+  const { totalVacationDays, handleOnChangeTotalVacationDays } =
+    useContextProvider();
   const { t } = useTranslation();
 
   return (
@@ -13,7 +14,7 @@ function VacationCard() {
           type="number"
           className="total-vacation-days"
           value={totalVacationDays}
-          onChange={e => setTotalVacationDays(e.target.value)}
+          onChange={handleOnChangeTotalVacationDays}
         />
       </div>
     </div>
