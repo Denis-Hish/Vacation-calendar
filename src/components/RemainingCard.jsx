@@ -7,7 +7,7 @@ function RenainderCard() {
   const { t } = useTranslation();
 
   return (
-    <div className="card neumorphism m-5 border-0">
+    <div className="card neumorphism my-4 mx-2 border-0">
       <div className="card-body text-center">
         <p className="card-number mb-0">{t('Remaining vacation days:')}</p>
         <span>{totalVacationDays - totalSelectedDays}</span>

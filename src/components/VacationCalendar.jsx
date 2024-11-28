@@ -26,9 +26,7 @@ function VacationCalendar() {
         onSelect={setSelectedDates}
       />
       {isLimitReached ? (
-        <p className="text-center text-primary" style={{ height: '24px' }}>
-          {t('Limit reached')}
-        </p>
+        <p className="text-center text-primary">{t('Limit reached')}</p>
       ) : (
         <p style={{ height: '24px' }}> </p>
       )}

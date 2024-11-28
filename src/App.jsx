@@ -13,20 +13,20 @@ function App() {
       <Header />
       <main>
         <div className="container">
-          <div className="cards row">
-            <div className="col">
+          <div className="cards row mt-3">
+            <div className="col-12 col-md-6">
               <VacationCard />
             </div>
-            <div className="col">
+            <div className="col-12 col-md-6">
               <RenainderCard />
             </div>
           </div>
 
           <div className="row">
-            <div className="col">
+            <div className="col-12 col-md-6">
               <VacationCalendar />
             </div>
-            <div className="col">
+            <div className="col-12 col-md-6">
               <VacationList />
             </div>
           </div>

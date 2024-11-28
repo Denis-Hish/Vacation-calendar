@@ -1,4 +1,5 @@
 import { useContextProvider } from '../hooks/useContextProvider';
+import icon from '../icons/calendar-icon.png';
 
 function Header() {
   const { theme, toggleTheme, language, handleChange } = useContextProvider();
@@ -6,9 +7,11 @@ function Header() {
   return (
     <header className="header neumorphism">
       <div className="container">
-        <div className="d-flex justify-content-between align-items-center py-2">
-          <div className="logo"></div>
-          <h1 className="app-name mb-0">VacatioN CaleNdaR</h1>
+        <div className="d-flex justify-content-between align-items-center py-2 gap-2">
+          <div className="logo">
+            <img src={icon} alt="Logo" />
+          </div>
+          <h1 className="app-name mb-0 text-center">VacatioN CaleNdaR</h1>
           <div className="header-buttons d-flex gap-2">
             <select
               className=" language-switcher btn btn-primary rounded-circle text-white"
