@@ -5,6 +5,7 @@ import RenainderCard from './components/RemainingCard';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import { Provider } from './hooks/Provider';
+import './language/translator';
 
 function App() {
   return (

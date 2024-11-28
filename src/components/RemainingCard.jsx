@@ -1,13 +1,15 @@
+import { useTranslation } from 'react-i18next';
 import { useContextProvider } from '../hooks/useContextProvider';
 
 function RenainderCard() {
   const { selectedDates, totalVacationDays } = useContextProvider();
   const totalSelectedDays = selectedDates.length;
+  const { t } = useTranslation();
 
   return (
     <div className="card neumorphism m-5 border-0">
       <div className="card-body text-center">
-        <p className="card-number mb-0">Remaining vacation days:</p>
+        <p className="card-number mb-0">{t('Remaining vacation days:')}</p>
         <span>{totalVacationDays - totalSelectedDays}</span>
       </div>
     </div>

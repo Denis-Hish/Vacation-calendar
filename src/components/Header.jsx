@@ -1,7 +1,7 @@
 import { useContextProvider } from '../hooks/useContextProvider';
 
 function Header() {
-  const { theme, toggleTheme } = useContextProvider();
+  const { theme, toggleTheme, language, handleChange } = useContextProvider();
 
   return (
     <header className="header neumorphism">
@@ -9,7 +9,17 @@ function Header() {
         <div className="d-flex justify-content-between align-items-center py-2">
           <div className="logo"></div>
           <h1 className="app-name mb-0">VacatioN CaleNdaR</h1>
-          <div className="header-buttons">
+          <div className="header-buttons d-flex gap-2">
+            <select
+              className=" language-switcher btn btn-primary rounded-circle text-white"
+              aria-label="Select language"
+              value={language}
+              onChange={handleChange}
+            >
+              <option value="ua">UA</option>
+              <option value="en">EN</option>
+              <option value="pl">PL</option>
+            </select>
             <button
               type="button"
               className="btn btn-primary rounded-circle text-white"
