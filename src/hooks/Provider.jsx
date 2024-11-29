@@ -1,6 +1,7 @@
 import { createContext, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { enUS, uk, pl } from 'react-day-picker/locale';
+import { DEFAULT_NUMBER_VACATION_DAYS } from '../config';
 
 const Context = createContext();
 
@@ -53,7 +54,7 @@ function Provider({ children }) {
   // Получение сохранённого числа дней отпуска из LocalStorage
   const getInitialTotalVacationDays = () => {
     const savedDays = localStorage.getItem('Vacation days');
-    return savedDays ? parseInt(savedDays, 10) : 20; // Преобразуем строку в число, по умолчанию 20
+    return savedDays ? parseInt(savedDays, 10) : DEFAULT_NUMBER_VACATION_DAYS; // Преобразуем строку в число, по умолчанию 22
   };
 
   const [selectedDates, setSelectedDates] = useState(getInitialSelectedDates);
@@ -121,6 +122,10 @@ function Provider({ children }) {
 
   // Блокировка изменения количества дней отпуска, если результат выражения меньше 0
   const handleOnChangeTotalVacationDays = e => {
+    if (e.target.value === '') {
+      setTotalVacationDays('');
+      return;
+    }
     const newVacationDays = parseInt(e.target.value, 10);
     if (newVacationDays >= totalSelectedDays) {
       setTotalVacationDays(newVacationDays);

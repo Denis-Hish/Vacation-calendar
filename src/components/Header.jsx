@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useContextProvider } from '../hooks/useContextProvider';
-import icon from '../icons/calendar-icon.png';
+import icon from '../../public/calendar-icon.png';
+import { Link } from 'react-router-dom';
 
 function Header() {
   const { theme, toggleTheme, language, handleChange } = useContextProvider();
@@ -26,13 +27,20 @@ function Header() {
     >
       <div className="container">
         <div className="d-flex justify-content-between align-items-center py-2 gap-2">
-          <div className="logo">
+          <Link to="/" className="logo">
             <img src={icon} alt="Logo" />
-          </div>
+          </Link>
           <h1 className="app-name mb-0 text-center">VacatioN CaleNdaR</h1>
           <div className="header-buttons d-flex gap-2">
+            <Link
+              to="login"
+              type="button"
+              className="logout btn btn-primary rounded-circle text-white"
+            >
+              <i className="bi bi-box-arrow-left"></i>
+            </Link>
             <select
-              className=" language-switcher btn btn-primary rounded-circle text-white"
+              className="language-switcher btn btn-primary rounded-circle text-white"
               aria-label="Select language"
               value={language}
               onChange={handleChange}
