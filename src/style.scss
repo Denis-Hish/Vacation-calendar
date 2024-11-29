@@ -77,17 +77,21 @@ header {
 
 main {
   flex: 1;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
 
-  .card {
-    p {
-      font-size: 18px;
-      font-weight: 700;
-    }
-    span {
-      font-size: 40px;
-      font-weight: 900;
-      color: var(--primary);
+  .cards {
+    .card {
+      max-width: 340px;
+      margin: 0 auto;
+      p {
+        font-size: 18px;
+        font-weight: 700;
+      }
+      span {
+        font-size: 40px;
+        font-weight: 900;
+        color: var(--primary);
+      }
     }
   }
 }
@@ -122,16 +126,15 @@ footer {
   }
 
   .disabled-btn {
-    // border: 1px solid rgb(0, 108, 180);
     pointer-events: none;
-    // cursor: no-drop;
   }
 }
 
 .vacation-list {
   padding: 0;
   max-width: 280px;
-  margin: 50px auto;
+  margin: 24px auto;
+  max-width: 340px;
 
   .vacation-item {
     position: relative;
@@ -180,5 +183,11 @@ footer {
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    display: none;
   }
 }

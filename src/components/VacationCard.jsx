@@ -7,7 +7,7 @@ function VacationCard() {
   const { t } = useTranslation();
 
   return (
-    <div className="card neumorphism my-4 mx-2 border-0">
+    <div className="card neumorphism my-4 border-0">
       <div className="card-body text-center">
         <p className="mb-0">{t('Quantity of vacation days:')}</p>
         <input

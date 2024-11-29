@@ -1,11 +1,29 @@
+import { useEffect, useState } from 'react';
 import { useContextProvider } from '../hooks/useContextProvider';
 import icon from '../icons/calendar-icon.png';
 
 function Header() {
   const { theme, toggleTheme, language, handleChange } = useContextProvider();
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
-    <header className="header neumorphism">
+    <header
+      className={`header neumorphism ${isScrolled ? 'header-scrolled' : ''}`}
+    >
       <div className="container">
         <div className="d-flex justify-content-between align-items-center py-2 gap-2">
           <div className="logo">
