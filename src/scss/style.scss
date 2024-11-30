@@ -60,12 +60,25 @@ header {
     .btn {
       width: 42px;
       height: 42px;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .user-name {
+      text-wrap: nowrap;
+    }
+
+    .user-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
     }
 
     .language-switcher {
       width: 42px;
       height: 42px;
-      padding: 0;
+      padding-left: 0;
+      padding-right: 0;
       -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;
@@ -81,23 +94,23 @@ header {
   }
 }
 
-main {
+section {
   flex: 1;
   margin: 1rem 0;
+}
 
-  .cards {
-    .card {
-      max-width: 340px;
-      margin: 0 auto;
-      p {
-        font-size: 18px;
-        font-weight: 700;
-      }
-      span {
-        font-size: 40px;
-        font-weight: 900;
-        color: var(--primary);
-      }
+.cards {
+  .card {
+    max-width: 340px;
+    margin: 0 auto;
+    p {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    span {
+      font-size: 40px;
+      font-weight: 900;
+      color: var(--primary);
     }
   }
 }
@@ -109,8 +122,16 @@ footer {
   }
 }
 
+.limit-reached {
+  text-wrap: balance;
+  min-height: 24px;
+}
+
+.vacation-list {
+  margin-top: calc(24px + 16px) !important;
+}
 #calendar {
-  margin: 1.5rem auto;
+  margin: 0 auto 1.5rem;
   width: fit-content;
   padding: 1rem;
   @include neumorphism;

@@ -16,6 +16,13 @@ function VacationCalendar() {
 
   return (
     <div ref={calendarRef}>
+      {isLimitReached ? (
+        <p className="limit-reached text-center text-primary">
+          {t('Limit reached')}
+        </p>
+      ) : (
+        <p style={{ height: '24px' }}> </p>
+      )}
       <DayPicker
         id="calendar"
         mode="multiple"
@@ -25,11 +32,6 @@ function VacationCalendar() {
         selected={selectedDates}
         onSelect={setSelectedDates}
       />
-      {isLimitReached ? (
-        <p className="text-center text-primary">{t('Limit reached')}</p>
-      ) : (
-        <p style={{ height: '24px' }}> </p>
-      )}
       <button
         type="button"
         className="btn btn-primary text-white d-block m-auto"

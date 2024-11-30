@@ -1,10 +1,10 @@
 function PageNotFound() {
   return (
-    <main>
+    <section>
       <div className="container">
         <h2 className="text-center text-primary">PageNotFound!</h2>
       </div>
-    </main>
+    </section>
   );
 }
 

@@ -5,7 +5,7 @@ import VacationList from '../components/VacationList';
 
 function Main() {
   return (
-    <main>
+    <section>
       <div className="container">
         <div className="cards row mt-3 justify-content-around">
           <div className="col col-12 col-md-6 p-0">
@@ -25,7 +25,7 @@ function Main() {
           </div>
         </div>
       </div>
-    </main>
+    </section>
   );
 }
 
