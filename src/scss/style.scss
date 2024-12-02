@@ -44,6 +44,11 @@ a[type='button'] {
   @include neumorphism;
 }
 
+section {
+  flex: 1;
+  margin: 1rem 0;
+}
+
 header {
   .logo {
     width: 42px;
@@ -94,9 +99,15 @@ header {
   }
 }
 
-section {
-  flex: 1;
-  margin: 1rem 0;
+#main {
+}
+#login {
+  .google-button {
+    margin: 1rem auto;
+    display: block;
+  }
+}
+#page-not-found {
 }
 
 .cards {

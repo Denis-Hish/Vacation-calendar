@@ -1,13 +1,14 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Provider } from './hooks/Provider';
+import { AuthProvider, useAuth } from './firebase/AuthProvider';
+import './language/translator';
+
 import Header from './components/Header';
 import Main from './pages/Main';
 import Footer from './components/Footer';
 import PageNotFound from './pages/PageNotFound';
 import Login from './pages/Login';
 // const Login = lazy(() => import('./pages/Login'));
-import './language/translator';
-import { AuthProvider, useAuth } from './firebase/AuthProvider';
 
 function App() {
   return (
@@ -28,7 +29,10 @@ function App() {
 }
 
 const AppContent = () => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+  console.log(user);
+
+  loading && <div>Loading...</div>;
   return user ? <Main /> : <Login />;
 };
 

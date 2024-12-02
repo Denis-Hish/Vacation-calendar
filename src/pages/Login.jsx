@@ -1,19 +1,11 @@
-import { useAuth } from '../firebase/AuthProvider';
+import GoogleButton from '../components/GoogleButton';
 
 const Login = () => {
-  const { login } = useAuth();
-
   return (
-    <section>
+    <section id="login">
       <div className="container">
         <h2 className="text-center text-primary">Login page</h2>
-        <button
-          type="button"
-          className="login btn btn-primary text-white m-auto"
-          onClick={login}
-        >
-          Login width Google
-        </button>
+        <GoogleButton />
       </div>
     </section>
   );

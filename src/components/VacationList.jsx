@@ -1,7 +1,7 @@
-import { useContextProvider } from '../hooks/useContextProvider';
+import { useProvider } from '../hooks/Provider';
 
 function VacationList() {
-  const { selectedDates, onRemoveDate } = useContextProvider();
+  const { selectedDates, onRemoveDate } = useProvider();
 
   const formatDate = isoDate => {
     const date = new Date(isoDate);

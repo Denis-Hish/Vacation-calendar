@@ -1,9 +1,8 @@
-import { useContextProvider } from '../hooks/useContextProvider';
+import { useProvider } from '../hooks/Provider';
 import { useTranslation } from 'react-i18next';
 
 function VacationCard() {
-  const { totalVacationDays, handleOnChangeTotalVacationDays } =
-    useContextProvider();
+  const { totalVacationDays, handleOnChangeTotalVacationDays } = useProvider();
   const { t } = useTranslation();
 
   return (

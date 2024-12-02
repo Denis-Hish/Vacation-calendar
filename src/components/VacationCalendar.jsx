@@ -1,6 +1,6 @@
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/style.css';
-import { useContextProvider } from '../hooks/useContextProvider';
+import { useProvider } from '../hooks/Provider';
 import { useTranslation } from 'react-i18next';
 
 function VacationCalendar() {
@@ -10,7 +10,7 @@ function VacationCalendar() {
     selectedLocale,
     calendarRef,
     isLimitReached,
-  } = useContextProvider();
+  } = useProvider();
 
   const { t } = useTranslation();
 

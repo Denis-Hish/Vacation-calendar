@@ -1,4 +1,4 @@
-import { createContext, useEffect, useRef, useState } from 'react';
+import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { enUS, uk, pl } from 'react-day-picker/locale';
 import { DEFAULT_NUMBER_VACATION_DAYS } from '../config';
@@ -200,4 +200,12 @@ function Provider({ children }) {
   return <Context.Provider value={value}>{children}</Context.Provider>;
 }
 
-export { Provider, Context };
+function useProvider() {
+  const context = useContext(Context);
+  if (context === undefined)
+    throw new Error('Context was used outside of the PostProvider');
+
+  return context;
+}
+
+export { Provider, useProvider };

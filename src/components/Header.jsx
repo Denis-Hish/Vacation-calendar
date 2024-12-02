@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useContextProvider } from '../hooks/useContextProvider';
+import { useProvider } from '../hooks/Provider';
 import icon from '../../public/calendar-icon.png';
 import { useAuth } from '../firebase/AuthProvider';
 
 function Header() {
-  const { theme, toggleTheme, language, handleChange } = useContextProvider();
+  const { theme, toggleTheme, language, handleChange } = useProvider();
   const [isScrolled, setIsScrolled] = useState(false);
   const { logout, user } = useAuth();
-
-  console.log(user);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,12 +38,15 @@ function Header() {
           </Link>
           <h1 className="app-name mb-0 text-center">VacatioN CaleNdaR</h1>
           <div className="header-buttons d-flex align-items-center gap-2">
-            {user ? (
+            {user?.displayName ? (
               <strong className="user-name mb-0">{user.displayName}</strong>
+            ) : user?.email ? (
+              user.email
             ) : (
               ''
             )}
-            {user ? (
+
+            {user?.photoURL ? (
               <img
                 src={user.photoURL}
                 alt="User Avatar"
