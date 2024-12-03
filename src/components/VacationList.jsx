@@ -8,6 +8,20 @@ function VacationList() {
     return date.toLocaleDateString();
   };
 
+  // Универсальное форматирование даты
+  // const formatDate = isoDate => {
+  //   try {
+  //     const date =
+  //       typeof isoDate === 'string' || isoDate instanceof String
+  //         ? new Date(isoDate)
+  //         : isoDate.toDate(); // Если это Timestamp из Firestore
+  //     return date.toLocaleDateString();
+  //   } catch (error) {
+  //     console.error('Invalid date format:', isoDate, error);
+  //     return 'Invalid Date';
+  //   }
+  // };
+
   return (
     <ul className="vacation-list">
       {selectedDates.map((date, index) => (

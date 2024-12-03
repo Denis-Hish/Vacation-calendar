@@ -7,7 +7,7 @@ import { useAuth } from '../firebase/AuthProvider';
 function Header() {
   const { theme, toggleTheme, language, handleChange } = useProvider();
   const [isScrolled, setIsScrolled] = useState(false);
-  const { logout, user } = useAuth();
+  const { logout, user, loading } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,10 +22,6 @@ function Header() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
-  const handleLogout = () => {
-    logout();
-  };
 
   return (
     <header
@@ -46,20 +42,27 @@ function Header() {
               ''
             )}
 
-            {user?.photoURL ? (
-              <img
-                src={user.photoURL}
-                alt="User Avatar"
-                className="user-avatar"
-              />
+            {!loading ? (
+              <>
+                {user?.photoURL ? (
+                  <img
+                    src={user?.photoURL}
+                    alt="User Avatar"
+                    className="user-avatar"
+                  />
+                ) : (
+                  ''
+                )}
+              </>
             ) : (
-              ''
+              'Loading...' //! DELETE !
             )}
+
             {user && (
               <button
                 type="button"
                 className="logout btn btn-primary rounded-circle text-white"
-                onClick={handleLogout}
+                onClick={() => logout()}
               >
                 <i className="bi bi-box-arrow-left"></i>
               </button>

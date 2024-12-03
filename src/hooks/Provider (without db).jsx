@@ -2,13 +2,10 @@ import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { enUS, uk, pl } from 'react-day-picker/locale';
 import { DEFAULT_NUMBER_VACATION_DAYS } from '../config';
-import { useAuth } from '../firebase/AuthProvider';
-import { loadUserData, saveUserData } from '../firebase/firebaseDB';
 
 const Context = createContext();
 
 function Provider({ children }) {
-  const { user } = useAuth();
   //* ---------------- DARK / LIGHT MODE ---------------- *//
   // Определение темы устройства
   const getPreferredTheme = () =>
@@ -65,42 +62,16 @@ function Provider({ children }) {
     getInitialTotalVacationDays
   );
   const totalSelectedDays = selectedDates.length;
-  // const [isDataLoading, setDataLoading] = useState(true);
-
-  // Загружаем данные из FireStore
-  useEffect(() => {
-    if (user) {
-      loadUserData(user.email).then(data => {
-        if (data) {
-          // console.log('DB data -', data);
-        }
-
-        // setSelectedDates(data.selectedDates);
-      });
-    }
-  }, [user, selectedDates, totalVacationDays]);
-
-  // Сохраняем данные в FireStore
-  useEffect(() => {
-    if (user) {
-      saveUserData(user.email, selectedDates, totalVacationDays);
-    }
-  }, [user, selectedDates, totalVacationDays]);
 
   // Сохранение выбранных дат в LocalStorage
   useEffect(() => {
-    localStorage.setItem('Selected dates', JSON.stringify(selectedDates));
+    localStorage.setItem('Selected dates', JSON.stringify(selectedDates)); // Сохраняем массив в виде строки
   }, [selectedDates]);
 
   // Сохранение `totalVacationDays` в localStorage при его изменении
   useEffect(() => {
-    localStorage.setItem('Vacation days', totalVacationDays);
+    localStorage.setItem('Vacation days', totalVacationDays); // Сохраняем число в виде строки
   }, [totalVacationDays]);
-
-  //TODO Пока идет загрузка...
-  // if (isDataLoading) {
-  //   return <div ref={loadingRef}>Loading...</div>;
-  // }
 
   // Удаление выбранной даты
   const handleRemoveDate = date => {
@@ -231,7 +202,7 @@ function Provider({ children }) {
 function useProvider() {
   const context = useContext(Context);
   if (context === undefined)
-    throw new Error('Context was used outside of the Provider');
+    throw new Error('Context was used outside of the PostProvider');
 
   return context;
 }

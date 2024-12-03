@@ -30,7 +30,6 @@ function App() {
 
 const AppContent = () => {
   const { user, loading } = useAuth();
-  console.log(user);
 
   if (loading) {
     return (
