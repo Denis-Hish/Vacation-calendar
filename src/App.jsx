@@ -32,7 +32,14 @@ const AppContent = () => {
   const { user, loading } = useAuth();
   console.log(user);
 
-  loading && <div>Loading...</div>;
+  if (loading) {
+    return (
+      <section className="text-center">
+        <h2 className="text-primary">Loading...</h2>
+      </section>
+    );
+  }
+
   return user ? <Main /> : <Login />;
 };
 

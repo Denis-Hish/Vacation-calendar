@@ -4,6 +4,7 @@ import {
   GoogleAuthProvider,
   signOut,
   signInWithPopup,
+  onAuthStateChanged,
 } from 'firebase/auth';
 import { app } from './firebaseConfig';
 
@@ -12,25 +13,30 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
-  const [user, setUser] = useState(auth.currentUser);
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(isUser => {
-      if (isUser) {
-        setUser(isUser);
-        setLoading(false);
-      }
+    const unsubscribe = onAuthStateChanged(auth, user => {
+      setUser(user);
+      setLoading(false);
     });
     return () => unsubscribe();
   }, [auth]);
 
-  console.log(auth);
-
-  const login = () => {
-    signInWithPopup(auth, provider)
-      .then(credentials => setUser(credentials.user))
-      .catch(error => console.error(error));
+  const login = async () => {
+    setLoading(true);
+    try {
+      const response = await signInWithPopup(auth, provider);
+      if (!response.user) return;
+      setUser(response.user);
+      console.log(response);
+    } catch (error) {
+      console.error('Login error:', error);
+      //TODO: отображение ошибки для пользователя
+    } finally {
+      setLoading(false);
+    }
   };
 
   const logout = () => {
