@@ -6,7 +6,9 @@ function RenainderCard() {
   const { t } = useTranslation();
 
   const remainingDays =
-    totalVacationDays === '' || totalVacationDays - totalSelectedDays < 0
+    totalVacationDays === '' ||
+    totalVacationDays - totalSelectedDays < 0 ||
+    totalVacationDays === undefined
       ? 0
       : totalVacationDays - totalSelectedDays;
 

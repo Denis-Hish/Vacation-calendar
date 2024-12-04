@@ -11,9 +11,9 @@ export const saveUserData = async (
       selectedDates,
       totalVacationDays,
     });
-    console.log('User data saved successfully');
+    console.log('Данные пользователя успешно сохранены');
   } catch (error) {
-    console.error('Error saving user data: ', error);
+    console.error('Ошибка сохранения данных пользователя: ', error);
   }
 };
 
@@ -23,11 +23,11 @@ export const loadUserData = async userId => {
     if (docSnap.exists()) {
       return docSnap.data();
     } else {
-      console.log('No such document!');
+      console.log('Такого документа нет!');
       return null;
     }
   } catch (error) {
-    console.error('Error loading user data: ', error);
+    console.error('Ошибка загрузки данных пользователя: ', error);
     return null;
   }
 };

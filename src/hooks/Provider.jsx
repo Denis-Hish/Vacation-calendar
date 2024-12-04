@@ -53,8 +53,8 @@ function Provider({ children }) {
   const totalSelectedDays = selectedDates.length;
   const [isDataLoading, setDataLoading] = useState(false);
 
-  console.log(selectedDates);
-  console.log(totalVacationDays);
+  // console.log(selectedDates);
+  // console.log(totalVacationDays);
 
   // Функция для преобразования меток времени из Firestore в объект Date
   const convertDates = timestamps => {
@@ -67,10 +67,18 @@ function Provider({ children }) {
       if (user) {
         setDataLoading(true);
         const data = await loadUserData(user.email);
-        if (data.totalVacationDays === null) {
-          setTotalVacationDays(DEFAULT_NUMBER_VACATION_DAYS);
-          setSelectedDates([]);
+        if (data === null) {
+          // Установить значения по умолчанию
+          const defaultDates = [];
+          const defaultDays = DEFAULT_NUMBER_VACATION_DAYS;
+
+          setTotalVacationDays(defaultDays);
+          setSelectedDates(defaultDates);
+
+          // Сохранить значения по умолчанию в Firestore
+          await saveUserData(user.email, defaultDates, defaultDays);
         } else {
+          // Загрузить данные из базы
           setTotalVacationDays(data.totalVacationDays);
           setSelectedDates(convertDates(data.selectedDates));
         }
@@ -80,15 +88,18 @@ function Provider({ children }) {
         setTotalVacationDays(undefined);
       }
     };
+
     fetchDataDB();
   }, [user]);
 
+  console.log(user);
+
   // Сохранение данных в FireStore
   useEffect(() => {
-    if (user) {
+    if (user && !isDataLoading) {
       saveUserData(user.email, selectedDates, totalVacationDays);
     }
-  }, [user, selectedDates, totalVacationDays]);
+  }, [user, selectedDates, totalVacationDays, isDataLoading]);
 
   // Удаление выбранной даты
   const handleRemoveDate = date => {
