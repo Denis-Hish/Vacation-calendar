@@ -48,59 +48,47 @@ function Provider({ children }) {
   //* --------------------------------------------------- *//
 
   //* ---------- SELECTING DAYS IN THE CALENDAR ---------- *//
-  // Получение сохранённых дат из LocalStorage
-  const getInitialSelectedDates = () => {
-    const savedDates = localStorage.getItem('Selected dates');
-    return savedDates ? JSON.parse(savedDates) : []; // Преобразуем строку обратно в массив
-  };
-
-  // Получение сохранённого числа дней отпуска из LocalStorage
-  const getInitialTotalVacationDays = () => {
-    const savedDays = localStorage.getItem('Vacation days');
-    return savedDays ? parseInt(savedDays, 10) : DEFAULT_NUMBER_VACATION_DAYS; // Преобразуем строку в число, по умолчанию 22
-  };
-
-  const [selectedDates, setSelectedDates] = useState(getInitialSelectedDates);
-  const [totalVacationDays, setTotalVacationDays] = useState(
-    getInitialTotalVacationDays
-  );
+  const [selectedDates, setSelectedDates] = useState([]);
+  const [totalVacationDays, setTotalVacationDays] = useState(undefined);
   const totalSelectedDays = selectedDates.length;
-  // const [isDataLoading, setDataLoading] = useState(true);
+  const [isDataLoading, setDataLoading] = useState(false);
 
-  // Загружаем данные из FireStore
+  console.log(selectedDates);
+  console.log(totalVacationDays);
+
+  // Функция для преобразования меток времени из Firestore в объект Date
+  const convertDates = timestamps => {
+    return timestamps.map(timestamp => new Date(timestamp.seconds * 1000));
+  };
+
+  // Загрузка данных из FireStore
   useEffect(() => {
-    if (user) {
-      loadUserData(user.email).then(data => {
-        if (data) {
-          // console.log('DB data -', data);
+    const fetchDataDB = async () => {
+      if (user) {
+        setDataLoading(true);
+        const data = await loadUserData(user.email);
+        if (data.totalVacationDays === null) {
+          setTotalVacationDays(DEFAULT_NUMBER_VACATION_DAYS);
+          setSelectedDates([]);
+        } else {
+          setTotalVacationDays(data.totalVacationDays);
+          setSelectedDates(convertDates(data.selectedDates));
         }
+        setDataLoading(false);
+      } else {
+        setSelectedDates([]);
+        setTotalVacationDays(undefined);
+      }
+    };
+    fetchDataDB();
+  }, [user]);
 
-        // setSelectedDates(data.selectedDates);
-      });
-    }
-  }, [user, selectedDates, totalVacationDays]);
-
-  // Сохраняем данные в FireStore
+  // Сохранение данных в FireStore
   useEffect(() => {
     if (user) {
       saveUserData(user.email, selectedDates, totalVacationDays);
     }
   }, [user, selectedDates, totalVacationDays]);
-
-  // Сохранение выбранных дат в LocalStorage
-  useEffect(() => {
-    localStorage.setItem('Selected dates', JSON.stringify(selectedDates));
-  }, [selectedDates]);
-
-  // Сохранение `totalVacationDays` в localStorage при его изменении
-  useEffect(() => {
-    localStorage.setItem('Vacation days', totalVacationDays);
-  }, [totalVacationDays]);
-
-  //TODO Пока идет загрузка...
-  // if (isDataLoading) {
-  //   return <div ref={loadingRef}>Loading...</div>;
-  // }
 
   // Удаление выбранной даты
   const handleRemoveDate = date => {
@@ -223,6 +211,7 @@ function Provider({ children }) {
     calendarRef,
     isLimitReached,
     handleOnChangeTotalVacationDays,
+    isDataLoading,
   };
 
   return <Context.Provider value={value}>{children}</Context.Provider>;
