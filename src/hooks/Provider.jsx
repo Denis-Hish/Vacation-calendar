@@ -49,12 +49,10 @@ function Provider({ children }) {
 
   //* ---------- SELECTING DAYS IN THE CALENDAR ---------- *//
   const [selectedDates, setSelectedDates] = useState([]);
-  const [totalVacationDays, setTotalVacationDays] = useState(undefined);
+  const [totalVacationDays, setTotalVacationDays] = useState(null);
   const totalSelectedDays = selectedDates.length;
   const [isDataLoading, setDataLoading] = useState(false);
-
-  // console.log(selectedDates);
-  // console.log(totalVacationDays);
+  const [isInitialized, setInitialized] = useState(false);
 
   // Функция для преобразования меток времени из Firestore в объект Date
   const convertDates = timestamps => {
@@ -67,25 +65,28 @@ function Provider({ children }) {
       if (user) {
         setDataLoading(true);
         const data = await loadUserData(user.email);
+
         if (data === null) {
-          // Установить значения по умолчанию
+          // Устанавливаем значения по умолчанию
           const defaultDates = [];
           const defaultDays = DEFAULT_NUMBER_VACATION_DAYS;
 
           setTotalVacationDays(defaultDays);
           setSelectedDates(defaultDates);
 
-          // Сохранить значения по умолчанию в Firestore
+          // Сохраняем в базу
           await saveUserData(user.email, defaultDates, defaultDays);
         } else {
-          // Загрузить данные из базы
+          // Загружаем данные из базы
           setTotalVacationDays(data.totalVacationDays);
           setSelectedDates(convertDates(data.selectedDates));
         }
+        setInitialized(true); // Флаг, что инициализация завершена
         setDataLoading(false);
       } else {
         setSelectedDates([]);
-        setTotalVacationDays(undefined);
+        setTotalVacationDays(null); // Обнуляем, если нет пользователя
+        setInitialized(false); // Сбрасываем флаг
       }
     };
 
@@ -96,10 +97,10 @@ function Provider({ children }) {
 
   // Сохранение данных в FireStore
   useEffect(() => {
-    if (user && !isDataLoading) {
+    if (user && isInitialized && !isDataLoading) {
       saveUserData(user.email, selectedDates, totalVacationDays);
     }
-  }, [user, selectedDates, totalVacationDays, isDataLoading]);
+  }, [user, selectedDates, totalVacationDays, isDataLoading, isInitialized]);
 
   // Удаление выбранной даты
   const handleRemoveDate = date => {

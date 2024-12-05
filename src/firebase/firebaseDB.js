@@ -7,6 +7,10 @@ export const saveUserData = async (
   totalVacationDays
 ) => {
   try {
+    if (typeof totalVacationDays === 'undefined') {
+      throw new Error('totalVacationDays не может быть undefined');
+    }
+
     await setDoc(doc(db, 'users', userId), {
       selectedDates,
       totalVacationDays,
