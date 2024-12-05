@@ -10,23 +10,23 @@ function VacationList() {
 
   return (
     <>
-      {isDataLoading && (
-        <h2 className="text-primary text-center">DB is Loading...</h2>
+      {isDataLoading ? (
+        <p className="text-primary text-center">Loading...</p>
+      ) : (
+        <ul className="vacation-list">
+          {selectedDates.map((date, index) => (
+            <li className="vacation-item neumorphism" key={index}>
+              <div className="date">{formatDate(date)}</div>
+              <button
+                type="button"
+                className="remove-btn btn-close rounded-circle"
+                aria-label="Close"
+                onClick={() => onRemoveDate(date)}
+              ></button>
+            </li>
+          ))}
+        </ul>
       )}
-
-      <ul className="vacation-list">
-        {selectedDates.map((date, index) => (
-          <li className="vacation-item neumorphism" key={index}>
-            <div className="date">{formatDate(date)}</div>
-            <button
-              type="button"
-              className="remove-btn btn-close rounded-circle"
-              aria-label="Close"
-              onClick={() => onRemoveDate(date)}
-            ></button>
-          </li>
-        ))}
-      </ul>
     </>
   );
 }

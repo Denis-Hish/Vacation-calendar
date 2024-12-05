@@ -51,8 +51,10 @@ section {
 
 header {
   .logo {
-    width: 42px;
-    height: 42px;
+    img {
+      width: 42px;
+      height: 42px;
+    }
   }
 
   .app-name {
@@ -61,12 +63,15 @@ header {
     font-weight: 700;
   }
 
+  .logo,
+  .header-buttons {
+    // flex: 1;
+  }
+
   .header-buttons {
     .btn {
       width: 42px;
       height: 42px;
-      padding-left: 0;
-      padding-right: 0;
     }
 
     .user-name {
@@ -97,17 +102,6 @@ header {
       }
     }
   }
-}
-
-#main {
-}
-#login {
-  .google-button {
-    margin: 1rem auto;
-    display: block;
-  }
-}
-#page-not-found {
 }
 
 .cards {
@@ -141,6 +135,7 @@ footer {
 .vacation-list {
   margin-top: calc(24px + 16px) !important;
 }
+
 #calendar {
   margin: 0 auto 1.5rem;
   width: fit-content;
@@ -224,8 +219,19 @@ footer {
   }
 }
 
+#main {
+}
+#login {
+  .google-button {
+    margin: 1rem auto;
+    display: block;
+  }
+}
+#page-not-found {
+}
+
 @media (max-width: 768px) {
-  h1 {
+  .app-name {
     display: none;
   }
 }

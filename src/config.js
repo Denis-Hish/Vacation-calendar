@@ -1,1 +1,1 @@
-export const DEFAULT_NUMBER_VACATION_DAYS = 22;
+export const DEFAULT_VACATION_DAYS = 20;

@@ -14,18 +14,18 @@ export const AuthProvider = ({ children }) => {
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loadingUser, setLoadingUser] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, user => {
       setUser(user);
-      setLoading(false);
+      setLoadingUser(false);
     });
     return () => unsubscribe();
   }, [auth]);
 
   const login = async () => {
-    setLoading(true);
+    setLoadingUser(true);
     try {
       const response = await signInWithPopup(auth, provider);
       if (!response.user) return;
@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }) => {
       console.error('Login error:', error);
       //TODO: отображение ошибки для пользователя
     } finally {
-      setLoading(false);
+      setLoadingUser(false);
     }
   };
 
@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading }}>
+    <AuthContext.Provider value={{ user, login, logout, loadingUser }}>
       {children}
     </AuthContext.Provider>
   );

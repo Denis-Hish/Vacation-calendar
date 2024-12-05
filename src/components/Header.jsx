@@ -7,7 +7,7 @@ import { useAuth } from '../firebase/AuthProvider';
 function Header() {
   const { theme, toggleTheme, language, handleChange } = useProvider();
   const [isScrolled, setIsScrolled] = useState(false);
-  const { logout, user, loading } = useAuth();
+  const { logout, user, loadingUser } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,16 +37,16 @@ function Header() {
             {user?.displayName ? (
               <strong className="user-name mb-0">{user.displayName}</strong>
             ) : user?.email ? (
-              user.email
+              user?.email
             ) : (
               ''
             )}
 
-            {!loading ? (
+            {!loadingUser ? (
               <>
                 {user?.photoURL ? (
                   <img
-                    src={user?.photoURL}
+                    src={user.photoURL}
                     alt="User Avatar"
                     className="user-avatar"
                   />
@@ -55,7 +55,7 @@ function Header() {
                 )}
               </>
             ) : (
-              'Loading...' //! DELETE !
+              ''
             )}
 
             {user && (

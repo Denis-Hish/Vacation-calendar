@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useProvider } from '../hooks/Provider';
 
 function RenainderCard() {
-  const { totalVacationDays, totalSelectedDays } = useProvider();
+  const { totalVacationDays, totalSelectedDays, isDataLoading } = useProvider();
   const { t } = useTranslation();
 
   const remainingDays =
@@ -16,7 +16,11 @@ function RenainderCard() {
     <div className="card neumorphism my-4 border-0">
       <div className="card-body text-center">
         <p className="card-number mb-0">{t('Remaining vacation days:')}</p>
-        <span>{remainingDays}</span>
+        {isDataLoading ? (
+          <p className="text-primary text-center">Loading...</p>
+        ) : (
+          <span>{remainingDays}</span>
+        )}
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { enUS, uk, pl } from 'react-day-picker/locale';
-import { DEFAULT_NUMBER_VACATION_DAYS } from '../config';
+import { DEFAULT_VACATION_DAYS } from '../config';
 import { useAuth } from '../firebase/AuthProvider';
 import { loadUserData, saveUserData } from '../firebase/firebaseDB';
 
@@ -69,7 +69,7 @@ function Provider({ children }) {
         if (data === null) {
           // Устанавливаем значения по умолчанию
           const defaultDates = [];
-          const defaultDays = DEFAULT_NUMBER_VACATION_DAYS;
+          const defaultDays = DEFAULT_VACATION_DAYS;
 
           setTotalVacationDays(defaultDays);
           setSelectedDates(defaultDates);
