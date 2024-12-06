@@ -16,6 +16,8 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loadingUser, setLoadingUser] = useState(true);
 
+  // console.log(user?.photoURL);
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, user => {
       setUser(user);

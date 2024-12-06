@@ -49,6 +49,10 @@ section {
   margin: 1rem 0;
 }
 
+.app-name {
+  font-family: 'Cinzel Decorative', cursive;
+}
+
 header {
   .logo {
     img {
@@ -56,9 +60,7 @@ header {
       height: 42px;
     }
   }
-
   .app-name {
-    font-family: 'Cinzel Decorative', cursive;
     font-size: clamp(1.2rem, 3vw, 2.5rem);
     font-weight: 700;
   }
@@ -223,15 +225,15 @@ footer {
 }
 #login {
   .google-button {
-    margin: 1rem auto;
-    display: block;
   }
 }
 #page-not-found {
 }
 
 @media (max-width: 768px) {
-  .app-name {
-    display: none;
+  header {
+    .app-name {
+      display: none;
+    }
   }
 }

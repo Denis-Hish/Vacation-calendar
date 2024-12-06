@@ -42,21 +42,28 @@ function Header() {
               ''
             )}
 
-            {!loadingUser ? (
-              <>
-                {user?.photoURL ? (
-                  <img
-                    src={user.photoURL}
-                    alt="User Avatar"
-                    className="user-avatar"
-                  />
-                ) : (
-                  ''
-                )}
-              </>
-            ) : (
-              ''
+            {!loadingUser && user && (
+              <img
+                src={user.photoURL}
+                alt="User Avatar"
+                className="user-avatar"
+              />
             )}
+
+            {/* {loadingUser ? (
+              <div>Loading...</div>
+            ) : user?.photoURL ? (
+              <img
+                src={`${user.photoURL}?v=${new Date().getTime()}`}
+                alt="User Avatar"
+                className="user-avatar"
+                onError={e => {
+                  e.target.src = '/user.jpg';
+                }}
+              />
+            ) : (
+              <div>No Avatar</div>
+            )} */}
 
             {user && (
               <button
