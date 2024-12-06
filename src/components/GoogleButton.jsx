@@ -1,4 +1,3 @@
-import { t } from 'i18next';
 import { useAuth } from '../firebase/AuthProvider';
 import './GoogleButton.css';
 
@@ -36,10 +35,8 @@ function GoogleButton() {
             <path fill="none" d="M0 0h48v48H0z"></path>
           </svg>
         </div>
-        <span className="gsi-material-button-contents">
-          {t('Sign in with Google')}
-        </span>
-        <span style={{ display: 'none' }}>{t('Sign in with Google')}</span>
+        <span className="gsi-material-button-contents">Google</span>
+        <span style={{ display: 'none' }}>Google</span>
       </div>
     </button>
   );

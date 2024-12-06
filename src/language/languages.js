@@ -10,7 +10,7 @@ export const resources = {
       'Login in progress!': 'Виконується вхід!',
       'Reset days': 'Скидання днів',
       'Welcome to': 'Ласкаво просимо до',
-      'Sign in with Google': 'Увійдіть за допомогою Google',
+      'Sign in with': 'Увійдіть за допомогою',
     },
   },
   en: {
@@ -21,7 +21,7 @@ export const resources = {
       'Login in progress!': 'Login in progress!',
       'Reset days': 'Reset days',
       'Welcome to': 'Welcome to',
-      'Sign in with Google': 'Sign in with Google',
+      'Sign in with': 'Sign in with',
     },
   },
   pl: {
@@ -32,7 +32,7 @@ export const resources = {
       'Login in progress!': 'Trwa logowanie!',
       'Reset days': 'Zresetuj dni',
       'Welcome to': 'Witamy w',
-      'Sign in with Google': 'Zaloguj się za pomocą Google',
+      'Sign in with': 'Zaloguj się za pomocą',
     },
   },
 };
