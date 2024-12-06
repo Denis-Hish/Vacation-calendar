@@ -93,7 +93,7 @@ function Provider({ children }) {
     fetchDataDB();
   }, [user]);
 
-  console.log(user);
+  // console.log(user);
 
   // Сохранение данных в FireStore
   useEffect(() => {

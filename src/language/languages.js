@@ -8,6 +8,7 @@ export const resources = {
       'Remaining vacation days:': 'Залишок днів відпустки:',
       'Limit reached': 'Ви досягли максимальної кількості днів відпустки!',
       'Login in progress!': 'Виконується вхід!',
+      'Reset days': 'Скидання днів',
     },
   },
   en: {
@@ -16,6 +17,7 @@ export const resources = {
       'Remaining vacation days:': 'Remaining vacation days:',
       'Limit reached': 'You have reached your maximum number of vacation days!',
       'Login in progress!': 'Login in progress!',
+      'Reset days': 'Reset days',
     },
   },
   pl: {
@@ -24,6 +26,7 @@ export const resources = {
       'Remaining vacation days:': 'Pozostałe dni urlopu:',
       'Limit reached': 'Osiągnąłeś maksymalną liczbę dni urlopu!',
       'Login in progress!': 'Trwa logowanie!',
+      'Reset days': 'Zresetuj dni',
     },
   },
 };

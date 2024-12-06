@@ -37,7 +37,7 @@ function VacationCalendar() {
         className="btn btn-primary text-white d-block m-auto"
         onClick={() => setSelectedDates([])}
       >
-        RESET
+        {t('Reset days')}
       </button>
     </div>
   );

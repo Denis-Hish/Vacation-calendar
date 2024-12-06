@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
       const response = await signInWithPopup(auth, provider);
       if (!response.user) return;
       setUser(response.user);
-      console.log(response);
+      // console.log(response);
     } catch (error) {
       console.error('Login error:', error);
       //TODO: отображение ошибки для пользователя
