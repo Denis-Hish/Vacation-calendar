@@ -50,21 +50,6 @@ function Header() {
               />
             )}
 
-            {/* {loadingUser ? (
-              <div>Loading...</div>
-            ) : user?.photoURL ? (
-              <img
-                src={`${user.photoURL}?v=${new Date().getTime()}`}
-                alt="User Avatar"
-                className="user-avatar"
-                onError={e => {
-                  e.target.src = '/user.jpg';
-                }}
-              />
-            ) : (
-              <div>No Avatar</div>
-            )} */}
-
             {user && (
               <button
                 type="button"
@@ -82,8 +67,8 @@ function Header() {
               onChange={handleChange}
             >
               <option value="ua">UA</option>
-              <option value="en">EN</option>
               <option value="pl">PL</option>
+              <option value="en">EN</option>
             </select>
             <button
               type="button"
