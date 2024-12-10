@@ -3,8 +3,8 @@ import {
   getAuth,
   GoogleAuthProvider,
   signOut,
-  signInWithPopup,
-  onAuthStateChanged,
+  getRedirectResult,
+  signInWithRedirect,
 } from 'firebase/auth';
 import { app } from './firebaseConfig';
 
@@ -16,25 +16,40 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loadingUser, setLoadingUser] = useState(true);
 
+  console.log(auth);
+
+  //! Стабильная версия !//
+
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, user => {
-      setUser(user);
-      setLoadingUser(false);
-    });
-    return () => unsubscribe();
+    // Обработка результата редиректа
+    const checkRedirectResult = async () => {
+      try {
+        const result = await getRedirectResult(auth);
+        console.log('Redirect result:', result);
+
+        if (result && result.user) {
+          // Пользователь успешно авторизован
+          setUser(result.user);
+          console.log('User:', result.user);
+        } else {
+          console.log('No user returned from getRedirectResult.');
+        }
+      } catch (error) {
+        console.error('Error during getRedirectResult:', error);
+      } finally {
+        setLoadingUser(false);
+      }
+    };
+
+    checkRedirectResult();
   }, [auth]);
 
   const login = async () => {
-    setLoadingUser(true);
     try {
-      const response = await signInWithPopup(auth, provider);
-      if (!response.user) return;
-      setUser(response.user);
-      // console.log(response);
+      setLoadingUser(true);
+      await signInWithRedirect(auth, provider);
     } catch (error) {
       console.error('Login error:', error);
-      //TODO: отображение ошибки для пользователя
-    } finally {
       setLoadingUser(false);
     }
   };
