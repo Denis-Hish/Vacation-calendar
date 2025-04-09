@@ -207,11 +207,19 @@ footer {
   font-size: 40px;
   font-weight: 900;
   color: var(--primary);
+  border: 1px solid transparent;
+  border-radius: var(--rounded);
+  outline: none;
   cursor: pointer;
 
+  &:hover {
+    background-color: var(--calendar-hovered);
+  }
+
   &:focus-visible {
-    border: none;
-    outline: none;
+    // border: none;
+    border: 1px solid var(--primary);
+    background-color: transparent;
   }
 
   &::-webkit-outer-spin-button,
