@@ -4,6 +4,7 @@ import { enUS, uk, pl } from 'react-day-picker/locale';
 import { DEFAULT_VACATION_DAYS } from '../config';
 import { useAuth } from '../firebase/AuthProvider';
 import { loadUserData, saveUserData } from '../firebase/firebaseDB';
+import { Toaster } from 'react-hot-toast';
 
 const Context = createContext();
 
@@ -208,6 +209,29 @@ function Provider({ children }) {
   }, [language]);
   //* -------------------------------------------------- *//
 
+  //* ---------------- НАСТРОЙКИ TOASTER --------------- *//
+  const toastConfig = {
+    position: 'bottom-right',
+
+    containerStyle: { bottom: '60px' },
+
+    toastOptions: {
+      className: 'hot-toast',
+      duration: 5000,
+
+      style: {
+        fontSize: '18px',
+        color: 'var(--bs-body-color)',
+        borderRadius: 'var(--rounded)',
+        backgroundColor: 'var(--neo-bg)',
+        boxShadow:
+          '5px 5px 5px var(--neo-shadow1), -5px -5px 5px var(--neo-shadow2)',
+        margin: '6px 0',
+      },
+    },
+  };
+  //* -------------------------------------------------- *//
+
   const value = {
     theme,
     selectedDates,
@@ -226,7 +250,12 @@ function Provider({ children }) {
     isDataLoading,
   };
 
-  return <Context.Provider value={value}>{children}</Context.Provider>;
+  return (
+    <Context.Provider value={value}>
+      {children}
+      <Toaster {...toastConfig} />
+    </Context.Provider>
+  );
 }
 
 function useProvider() {
