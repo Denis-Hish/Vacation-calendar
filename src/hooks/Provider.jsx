@@ -1,15 +1,18 @@
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import { useTranslation } from 'react-i18next';
 import { enUS, uk, pl } from 'react-day-picker/locale';
-import { DEFAULT_VACATION_DAYS } from '../config';
+import toast, { Toaster } from 'react-hot-toast';
 import { useAuth } from '../firebase/AuthProvider';
 import { loadUserData, saveUserData } from '../firebase/firebaseDB';
-import { Toaster } from 'react-hot-toast';
+import { DEFAULT_VACATION_DAYS } from '../config';
+import { t } from 'i18next';
 
 const Context = createContext();
 
 function Provider({ children }) {
   const { user } = useAuth();
+  const isMobile = useMediaQuery({ maxWidth: 767 });
   //* ---------------- DARK / LIGHT MODE ---------------- *//
   // Определение темы устройства
   const getPreferredTheme = () =>
@@ -54,6 +57,7 @@ function Provider({ children }) {
   const totalSelectedDays = selectedDates.length;
   const [isDataLoading, setDataLoading] = useState(false);
   const [isInitialized, setInitialized] = useState(false);
+  const prevSelectedDatesLengthRef = useRef(0);
 
   // Функция для преобразования меток времени из Firestore в объект Date
   const convertDates = timestamps => {
@@ -142,12 +146,27 @@ function Provider({ children }) {
   // Сообщение о достижении максимального количества дней отпуска
   const [isLimitReached, setIsLimitReached] = useState(false);
 
+  // useEffect(() => {
+  //   if (selectedDates.length >= totalVacationDays) {
+  //     setIsLimitReached(true);
+  //   } else {
+  //     setIsLimitReached(false);
+  //   }
+  // }, [selectedDates, totalVacationDays]);
+
+  // Уведомление о достижении лимита
   useEffect(() => {
-    if (selectedDates.length >= totalVacationDays) {
+    const currentLength = selectedDates.length;
+    if (
+      currentLength > prevSelectedDatesLengthRef.current &&
+      currentLength >= totalVacationDays
+    ) {
       setIsLimitReached(true);
-    } else {
+      toast.error(t('Limit reached'));
+    } else if (currentLength < totalVacationDays) {
       setIsLimitReached(false);
     }
+    prevSelectedDatesLengthRef.current = currentLength;
   }, [selectedDates, totalVacationDays]);
 
   // Блокировка изменения количества дней отпуска, если результат выражения меньше 0
@@ -209,9 +228,9 @@ function Provider({ children }) {
   }, [language]);
   //* -------------------------------------------------- *//
 
-  //* ---------------- НАСТРОЙКИ TOASTER --------------- *//
+  //* ---------------- SETTINGS TOASTER --------------- *//
   const toastConfig = {
-    position: 'bottom-right',
+    position: isMobile ? 'bottom-center' : 'bottom-right',
 
     containerStyle: { bottom: '60px' },
 

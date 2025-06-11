@@ -41,7 +41,7 @@ function VacationCalendar() {
       )}
       <button
         type='button'
-        className='btn btn-primary text-white d-block m-auto'
+        className='btn btn-primary text-white d-block m-auto mb-3'
         onClick={() => {
           toast.error('Это сообщение от библиотеки react-hot-toast!');
         }}

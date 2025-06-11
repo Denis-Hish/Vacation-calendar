@@ -1,13 +1,18 @@
 {
+  "Welcome": "Ласкаво просимо",
+  "to": "до",
   "Quantity of vacation days:": "Кількість днів відпустки:",
   "Remaining vacation days:": "Залишок днів відпустки:",
-  "Limit reached": "Ви досягли максимальної кількості днів відпустки!",
+  "Limit reached": "Досягнуто максимальної кількості днів відпустки!",
   "Login in progress!": "Виконується вхід!",
   "Reset days": "Скидання днів",
-  "Welcome to": "Ласкаво просимо до",
   "Sign in with": "Увійдіть за допомогою",
   "Cancel": "Відміна",
   "Reset": "Скинути",
   "Attention!": "Увага!",
-  "Do you really want to drop all the chosen days?": "Ви справді хочете видалити всі вибрані дні?"
+  "Do you really want to drop all the chosen days?": "Ви справді хочете видалити всі вибрані дні?",
+  "User data is successfully saved": "Дані успішно збережено!",
+  "Error saving user data": "Помилка збереження даних користувача!",
+  "All selected days have been reset": "Усі вибрані дні скинуто!",
+  "Login error": "Помилка входу!"
 }

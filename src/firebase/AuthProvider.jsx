@@ -7,6 +7,8 @@ import {
   onAuthStateChanged,
 } from 'firebase/auth';
 import { app } from './firebaseConfig';
+import toast from 'react-hot-toast';
+import { t } from 'i18next';
 
 const AuthContext = createContext();
 
@@ -30,10 +32,15 @@ export const AuthProvider = ({ children }) => {
       const response = await signInWithPopup(auth, provider);
       if (!response.user) return;
       setUser(response.user);
-      // console.log(response);
+      toast.success(
+        <>
+          {t('Welcome')} &nbsp;{' '}
+          <strong>{response.user.displayName || response.user.email}</strong>
+        </>
+      );
     } catch (error) {
       console.error('Login error:', error);
-      //TODO: отображение ошибки для пользователя
+      toast.error(t('Login error'));
     } finally {
       setLoadingUser(false);
     }
