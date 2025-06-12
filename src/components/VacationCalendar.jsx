@@ -4,6 +4,8 @@ import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/style.css';
 import { useProvider } from '../hooks/Provider';
 import toast from 'react-hot-toast';
+import SpinnerMini from './SpinnerMini';
+import Spinner from './Spinner';
 
 function VacationCalendar() {
   const {
@@ -39,6 +41,8 @@ function VacationCalendar() {
       ) : (
         <p style={{ height: '24px' }}> </p>
       )}
+
+      <SpinnerMini />
       {/* <button
         type='button'
         className='btn btn-primary text-white d-block m-auto mb-3'
