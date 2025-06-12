@@ -23,7 +23,7 @@ function Header() {
     };
   }, []);
 
-  // Обновляем атрибут lang при изменении language
+  // Обновление атрибута lang при изменении language
   useEffect(() => {
     document.documentElement.lang = language === 'ua' ? 'uk' : language;
   }, [language]);

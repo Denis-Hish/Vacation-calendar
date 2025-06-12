@@ -4,7 +4,6 @@ import {
   GoogleAuthProvider,
   signOut,
   onAuthStateChanged,
-  getRedirectResult,
   signInWithPopup,
 } from 'firebase/auth';
 import { app } from './firebaseConfig';
@@ -19,13 +18,14 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loadingUser, setLoadingUser] = useState(true);
   const prevUserRef = useRef(null);
+  const isInitialLoad = useRef(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
       setUser(currentUser);
       setLoadingUser(false);
 
-      if (!prevUserRef.current && currentUser) {
+      if (!prevUserRef.current && currentUser && !isInitialLoad.current) {
         toast.success(
           <>
             {t('Welcome')} &nbsp;
@@ -33,24 +33,12 @@ export const AuthProvider = ({ children }) => {
           </>
         );
       }
-
       prevUserRef.current = currentUser;
+      if (isInitialLoad.current) {
+        isInitialLoad.current = false;
+      }
     });
     return () => unsubscribe();
-  }, [auth]);
-
-  useEffect(() => {
-    getRedirectResult(auth)
-      .then(result => {
-        if (result?.user) {
-          setUser(result.user);
-        } else if (result) {
-          console.error('Redirect result error:', result.error);
-        }
-      })
-      .catch(error => {
-        console.error('Error getting redirect result:', error);
-      });
   }, [auth]);
 
   const login = async () => {
