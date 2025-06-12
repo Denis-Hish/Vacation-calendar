@@ -2,11 +2,31 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useProvider } from '../hooks/Provider';
 import { useAuth } from '../firebase/AuthProvider';
+import logoPng from '../../public/calendar-icon.png';
 
 function Header() {
   const { theme, toggleTheme, language, handleChange } = useProvider();
   const [isScrolled, setIsScrolled] = useState(false);
   const { logout, user, loadingUser } = useAuth();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  // Обновляем атрибут lang при изменении language
+  useEffect(() => {
+    document.documentElement.lang = language === 'ua' ? 'uk' : language;
+  }, [language]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,7 +49,7 @@ function Header() {
       <div className='container'>
         <div className='d-flex justify-content-between align-items-center py-2 gap-2'>
           <Link to='/' className='logo'>
-            <img src='/calendar-icon.png' alt='Logo' />
+            <img src={logoPng} alt='Logo' />
           </Link>
           <h1 className='app-name mb-0 text-center'>VacatioN CaleNdaR</h1>
           <div className='header-buttons d-flex align-items-center gap-2'>

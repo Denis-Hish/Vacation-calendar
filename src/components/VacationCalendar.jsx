@@ -76,11 +76,12 @@ function VacationCalendar() {
         aria-hidden={!showModal}
       >
         <div className='modal-dialog modal-dialog-centered'>
-          <div className='modal-content'>
-            <div className='modal-header'>
+          <div className='modal-content py-2 px-1'>
+            <div className='modal-header border-bottom-0'>
               <h5
                 className='modal-title text-center text-danger w-100'
                 id='resetModalLabel'
+                style={{ fontWeight: '700' }}
               >
                 {t('Attention!')}
               </h5>
@@ -91,11 +92,14 @@ function VacationCalendar() {
                 aria-label='Close'
               ></button>
             </div>
-            <div className='modal-body text-center'>
+            <div
+              className='modal-body text-center'
+              style={{ textWrap: 'balance' }}
+            >
               {t('Reset confirmation')} <br />
               {t('This action is irreversible')}
             </div>
-            <div className='modal-footer'>
+            <div className='modal-footer justify-content-evenly border-top-0'>
               <button
                 type='button'
                 className='btn btn-secondary'

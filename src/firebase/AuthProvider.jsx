@@ -1,10 +1,11 @@
-import { useEffect, useState, createContext, useContext } from 'react';
+import { useEffect, useState, createContext, useContext, useRef } from 'react';
 import {
   getAuth,
   GoogleAuthProvider,
   signOut,
-  signInWithPopup,
   onAuthStateChanged,
+  getRedirectResult,
+  signInWithPopup,
 } from 'firebase/auth';
 import { app } from './firebaseConfig';
 import toast from 'react-hot-toast';
@@ -17,31 +18,48 @@ export const AuthProvider = ({ children }) => {
   const provider = new GoogleAuthProvider();
   const [user, setUser] = useState(null);
   const [loadingUser, setLoadingUser] = useState(true);
+  const prevUserRef = useRef(null);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, user => {
-      setUser(user);
+    const unsubscribe = onAuthStateChanged(auth, currentUser => {
+      setUser(currentUser);
       setLoadingUser(false);
+
+      if (!prevUserRef.current && currentUser) {
+        toast.success(
+          <>
+            {t('Welcome')} &nbsp;
+            <strong>{currentUser.displayName || currentUser.email}</strong>
+          </>
+        );
+      }
+
+      prevUserRef.current = currentUser;
     });
     return () => unsubscribe();
+  }, [auth]);
+
+  useEffect(() => {
+    getRedirectResult(auth)
+      .then(result => {
+        if (result?.user) {
+          setUser(result.user);
+        } else if (result) {
+          console.error('Redirect result error:', result.error);
+        }
+      })
+      .catch(error => {
+        console.error('Error getting redirect result:', error);
+      });
   }, [auth]);
 
   const login = async () => {
     setLoadingUser(true);
     try {
-      const response = await signInWithPopup(auth, provider);
-      if (!response.user) return;
-      setUser(response.user);
-      toast.success(
-        <>
-          {t('Welcome')} &nbsp;
-          <strong>{response.user.displayName || response.user.email}</strong>
-        </>
-      );
+      await signInWithPopup(auth, provider);
     } catch (error) {
       console.error('Login error:', error);
       toast.error(t('Login error'));
-    } finally {
       setLoadingUser(false);
     }
   };
