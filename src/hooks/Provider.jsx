@@ -236,7 +236,7 @@ function Provider({ children }) {
 
     toastOptions: {
       className: 'hot-toast',
-      duration: 500000,
+      duration: 5000,
 
       style: {
         fontSize: '18px',

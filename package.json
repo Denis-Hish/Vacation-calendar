@@ -21,7 +21,8 @@
     "react-i18next": "^15.1.2",
     "react-responsive": "^10.0.1",
     "react-router-dom": "^7.0.1",
-    "sass": "^1.81.0"
+    "sass": "^1.81.0",
+    "vite-plugin-mkcert": "^1.17.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",

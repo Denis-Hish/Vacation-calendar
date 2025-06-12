@@ -39,7 +39,7 @@ function VacationCalendar() {
       ) : (
         <p style={{ height: '24px' }}> </p>
       )}
-      <button
+      {/* <button
         type='button'
         className='btn btn-primary text-white d-block m-auto mb-3'
         onClick={() => {
@@ -49,7 +49,7 @@ function VacationCalendar() {
         }}
       >
         Show toast
-      </button>
+      </button> */}
       <DayPicker
         id='calendar'
         mode='multiple'
