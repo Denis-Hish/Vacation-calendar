@@ -10,9 +10,10 @@
   "Cancel": "Anuluj",
   "Reset": "Resetuj",
   "Attention!": "Uwaga!",
-  "Do you really want to drop all the chosen days?": "Czy naprawdę chcesz usunąć wszystkie wybrane dni?",
+  "Reset confirmation": "Czy naprawdę chcesz usunąć wszystkie wybrane dni?",
+  "This action is irreversible": "Ta czynność jest nieodwracalna!",
+  "All selected days have been reset": "Wszystkie wybrane dni zostały zresetowane!",
   "User data is successfully saved": "Dane zostały pomyślnie zapisane!",
   "Error saving user data": "Błąd podczas zapisywania danych użytkownika!",
-  "All selected days have been reset": "Wszystkie wybrane dni zostały zresetowane!",
   "Login error": "Błąd logowania!"
 }

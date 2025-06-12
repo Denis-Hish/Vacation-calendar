@@ -236,15 +236,15 @@ function Provider({ children }) {
 
     toastOptions: {
       className: 'hot-toast',
-      duration: 5000,
+      duration: 500000,
 
       style: {
         fontSize: '18px',
         color: 'var(--bs-body-color)',
         borderRadius: 'var(--rounded)',
         backgroundColor: 'var(--neo-bg)',
-        boxShadow:
-          '5px 5px 5px var(--neo-shadow1), -5px -5px 5px var(--neo-shadow2)',
+        // boxShadow:
+        //   '5px 5px 5px var(--neo-shadow1), -5px -5px 5px var(--neo-shadow2)',
         margin: '6px 0',
       },
     },

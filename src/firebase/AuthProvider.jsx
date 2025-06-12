@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
       setUser(response.user);
       toast.success(
         <>
-          {t('Welcome')} &nbsp;{' '}
+          {t('Welcome')} &nbsp;
           <strong>{response.user.displayName || response.user.email}</strong>
         </>
       );

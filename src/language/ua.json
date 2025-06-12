@@ -10,9 +10,10 @@
   "Cancel": "Відміна",
   "Reset": "Скинути",
   "Attention!": "Увага!",
-  "Do you really want to drop all the chosen days?": "Ви справді хочете видалити всі вибрані дні?",
+  "Reset confirmation": "Ви дійсно хочете видалити всі зазначені дні?",
+  "This action is irreversible": "Ця дії необоротна!",
+  "All selected days have been reset": "Усі зазначені дні скинуто!",
   "User data is successfully saved": "Дані успішно збережено!",
   "Error saving user data": "Помилка збереження даних користувача!",
-  "All selected days have been reset": "Усі вибрані дні скинуто!",
   "Login error": "Помилка входу!"
 }

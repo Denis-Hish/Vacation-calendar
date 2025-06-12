@@ -10,9 +10,10 @@
   "Cancel": "Cancel",
   "Reset": "Reset",
   "Attention!": "Attention!",
-  "Do you really want to drop all the chosen days?": "Do you really want to drop all the chosen days?",
+  "Reset confirmation": "Are you sure you want to delete all chosen days?",
+  "This action is irreversible": "This action is irreversible!",
+  "All selected days have been reset": "All selected days have been reset!",
   "User data is successfully saved": "Data saved successfully!",
   "Error saving user data": "Error saving user data!",
-  "All selected days have been reset": "All selected days have been reset!",
   "Login error": "Login error!"
 }

@@ -27,7 +27,7 @@ function VacationCalendar() {
   function handleConfirmReset() {
     setSelectedDates([]); // Сбросить даты
     setShowModal(false); // Закрыть модальное окно
-    toast.success(t('All selected days have been reset')); // Показать уведомление
+    toast(t('All selected days have been reset'), { icon: '⚠️' }); // Показать уведомление
   }
 
   return (
@@ -43,7 +43,9 @@ function VacationCalendar() {
         type='button'
         className='btn btn-primary text-white d-block m-auto mb-3'
         onClick={() => {
-          toast.error('Это сообщение от библиотеки react-hot-toast!');
+          toast.error('Это сообщение от библиотеки react-hot-toast!', {
+            icon: '⚠️',
+          });
         }}
       >
         Show toast
@@ -90,7 +92,8 @@ function VacationCalendar() {
               ></button>
             </div>
             <div className='modal-body text-center'>
-              {t('Do you really want to drop all the chosen days?')}
+              {t('Reset confirmation')} <br />
+              {t('This action is irreversible')}
             </div>
             <div className='modal-footer'>
               <button
